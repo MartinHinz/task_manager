@@ -4,10 +4,12 @@
   <table class="table table-hover table-bordered">
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Created at</th>
-        <th>Completed</th>
-        <th>Actions</th>
+        <th colspan="2">  <%= simple_form_for Task.new,
+            html: { class: "form-inline" }, remote: true do |f| %>
+            <%= f.input_field :title, :placeholder => "New Task" %>
+            <%= f.submit 'Save', class: 'btn btn-primary' %>
+          <% end %>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -17,12 +19,6 @@
             <strong>
               <%= task.title %>
             </strong>
-          </td>
-          <td class="text-info">
-            <%= task.created_at %>
-          </td>
-          <td class="text-success">
-            <%= task.completed %>
           </td>
           <td>
             <%= link_to task_path(task), remote: true, method: :delete, data: {confirm: "Are you sure you want to delete task #{task.title}?"} do %>
